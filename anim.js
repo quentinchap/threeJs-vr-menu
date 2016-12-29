@@ -164,19 +164,24 @@ function animate() {
     
     if(this.spline)
     {
-    var time = Date.now();
-    var looptime = 5 * 1000;
-    var t = ( time % looptime ) / looptime;
+        var time = Date.now();
+        var looptime = 5 * 1000;
+        var t = ( time % looptime ) / looptime;
 
-    //Then at each increment (in your render loop or in the 'update' function of a tween)
-    var newPosition = this.spline.getPointAt( t );
-    var target = this.spline.getPointAt( t + .001);
+        if( t+.001 < 1)
+        {
+            //Then at each increment (in your render loop or in the 'update' function of a tween)
+            var newPosition = this.spline.getPointAt( t );
+            var target = this.spline.getPointAt( t + .001);
 
-    this.cone.position.copy(newPosition);
 
-    //Also update the car's orientation so it looks at the road
-    //var target = this.spline.getPoint( this.conePositionOnSpline + .001 );
-    this.cone.lookAt( target );//+.001 or whatever
+            this.cone.position.copy(newPosition);
+
+            //Also update the car's orientation so it looks at the road
+            //var target = this.spline.getPoint( this.conePositionOnSpline + .001 );
+            this.cone.lookAt( target );//+.001 or whatever
+        }
+
     }
 
     
